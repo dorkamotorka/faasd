@@ -39,7 +39,8 @@ services:
        - "127.0.0.1:9090:9090"
 
   gateway:
-    image: dorkamotorka/gateway:0.4
+    image: dorkamotorka/gateway:0.2
+    privileged: true # TODO: neccessary because of rlimit. Can we solve it differently?
     environment:
       - basic_auth=true
       - functions_provider_url=http://faasd-provider:8081/
@@ -62,6 +63,7 @@ services:
         target: /run/secrets/basic-auth-user
     cap_add:
       - CAP_NET_RAW
+      - CAP_SYS_RESOURCE # TODO: can we remove this?
     depends_on:
       - nats
       - prometheus
