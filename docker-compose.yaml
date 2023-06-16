@@ -39,8 +39,7 @@ services:
        - "127.0.0.1:9090:9090"
 
   gateway:
-    image: dorkamotorka/gateway:0.11
-    privileged: true # TODO: neccessary because of rlimit. Can we solve it differently?
+    image: dorkamotorka/gateway:0.16
     environment:
       - basic_auth=true
       - functions_provider_url=http://faasd-provider:8081/
@@ -66,6 +65,7 @@ services:
       - prometheus
     ports:
       - "8080:8080"
+    # NOTE: Admin privileges needed to avoid "Operation not permitted"!
     cap_add:
       - CAP_SYS_ADMIN
       - CAP_NET_ADMIN
