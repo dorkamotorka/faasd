@@ -68,6 +68,7 @@ services:
       - "8080:8080"
     cap_add:
       - CAP_SYS_ADMIN
+      - CAP_NET_ADMIN
 
   queue-worker:
     image: ghcr.io/openfaas/queue-worker:0.13.3
