@@ -39,7 +39,9 @@ services:
        - "127.0.0.1:9090:9090"
 
   gateway:
-    image: dorkamotorka/gateway:0.16
+    image: dorkamotorka/gateway:1.0.10
+    privileged: true
+    network_mode: host
     environment:
       - basic_auth=true
       - functions_provider_url=http://faasd-provider:8081/
@@ -71,7 +73,7 @@ services:
       - CAP_NET_ADMIN
 
   queue-worker:
-    image: ghcr.io/openfaas/queue-worker:0.13.3
+    image: ghcr.io/openfaas/queue-worker:0.14.1
     environment:
       - faas_nats_address=nats
       - faas_nats_port=4222
